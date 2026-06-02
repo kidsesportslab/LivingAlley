@@ -14,6 +14,8 @@ public class NPCMover : MonoBehaviour
     public float workDuration = 5f;
     public float workReward = 30f;
     public float money = 100f;
+    public float lifespan = 300f;
+    private float age = 0f;
     public TextMeshPro statusText;
 
     private Vector3 currentTarget;
@@ -37,6 +39,13 @@ public class NPCMover : MonoBehaviour
 
     void Update()
     {
+        age += Time.deltaTime;
+if (age >= lifespan)
+{
+    GameLogger.Instance.Log(gameObject.name, "生涯を終えた");
+    Destroy(gameObject);
+    return;
+}
         hunger += Time.deltaTime;
         fatigue += Time.deltaTime;
         loneliness += Time.deltaTime;
