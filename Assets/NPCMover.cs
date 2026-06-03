@@ -165,14 +165,14 @@ return;
     }
 
     void UpdateStatus(string text)
+{
+    if (statusText != null)
     {
-        if (statusText != null)
-        {
-            statusText.text = text;
-            statusText.transform.LookAt(Camera.main.transform);
-            statusText.transform.Rotate(0, 180, 0);
-        }
+        statusText.text = npcName + "\n" + text;
+        statusText.transform.LookAt(Camera.main.transform);
+        statusText.transform.Rotate(0, 180, 0);
     }
+}
 
     void MoveToward(Vector3 target)
     {
