@@ -14,6 +14,7 @@ public class NPCMover : MonoBehaviour
     public float workDuration = 5f;
     public float workReward = 30f;
     public float money = 100f;
+    public string npcName = "名無し";
     public float lifespan = 300f;
     private float age = 0f;
     public TextMeshPro statusText;
@@ -34,6 +35,7 @@ public class NPCMover : MonoBehaviour
     {
         hunger = Random.Range(0f, hungerMax * 0.5f);
         fatigue = Random.Range(0f, fatigueMax * 0.5f);
+        GameLogger.Instance.Log(npcName, "誕生した");
         SetRandomTarget();
     }
 
@@ -42,9 +44,10 @@ public class NPCMover : MonoBehaviour
         age += Time.deltaTime;
 if (age >= lifespan)
 {
-    GameLogger.Instance.Log(gameObject.name, "生涯を終えた");
-    Destroy(gameObject);
-    return;
+    GameLogger.Instance.Log(npcName, "生涯を終えた");
+FindObjectsByType<NPCSpawner>(FindObjectsSortMode.None)[0].SpawnNPC();
+Destroy(gameObject);
+return;
 }
         hunger += Time.deltaTime;
         fatigue += Time.deltaTime;
@@ -64,7 +67,7 @@ if (age >= lifespan)
                 money += workReward;
                 workTimer = 0f;
                 isWorking = false;
-                GameLogger.Instance.Log(gameObject.name, "仕事をした");
+                GameLogger.Instance.Log(npcName, "仕事をした");
                 SetRandomTarget();
             }
             return;
@@ -108,7 +111,7 @@ if (age >= lifespan)
             {
                 fatigue = 0f;
                 isTired = false;
-                GameLogger.Instance.Log(gameObject.name, "眠った");
+                GameLogger.Instance.Log(npcName, "眠った");
                 SetRandomTarget();
             }
             return;
@@ -130,7 +133,7 @@ if (age >= lifespan)
                 isHungry = false;
                 RelocateFood(nearestFood);
                 money -= 10f;
-                GameLogger.Instance.Log(gameObject.name, "食事をした");
+                GameLogger.Instance.Log(npcName, "食事をした");
                 SetRandomTarget();
             }
             return;
