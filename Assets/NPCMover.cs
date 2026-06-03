@@ -172,6 +172,33 @@ return;
         statusText.transform.LookAt(Camera.main.transform);
         statusText.transform.Rotate(0, 180, 0);
     }
+
+    Renderer rend = GetComponent<Renderer>();
+    if (rend == null) return;
+
+    switch (text)
+{
+    case "hungry":
+        rend.material.color = Color.red;
+        speed = 4f;
+        break;
+    case "sleep":
+        rend.material.color = Color.blue;
+        speed = 0.5f;
+        break;
+    case "working":
+        rend.material.color = Color.yellow;
+        speed = 0f;
+        break;
+    case "social":
+        rend.material.color = Color.green;
+        speed = 3f;
+        break;
+    default:
+        rend.material.color = Color.white;
+        speed = 2f;
+        break;
+}
 }
 
     void MoveToward(Vector3 target)
