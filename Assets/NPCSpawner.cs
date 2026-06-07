@@ -8,6 +8,16 @@ public class NPCSpawner : MonoBehaviour
     public GameObject[] foods;
 public GameObject bed;
 
+public int initialSpawnCount = 3;
+
+void Start()
+{
+    for (int i = 0; i < initialSpawnCount; i++)
+    {
+        SpawnNPC();
+    }
+}
+
     private string[] npcNames = {
         "ケンジ", "ハルト", "ソウタ", "リョウ", "ナオキ",
         "アヤカ", "ミサキ", "ユイ", "ハナ", "サクラ"
