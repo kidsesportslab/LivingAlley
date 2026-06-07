@@ -12,8 +12,8 @@ public class NPCMover : MonoBehaviour
     public float fatigueMax = 15f;
     public float lonelinessMax = 20f;
     public float workDuration = 5f;
-    public float workReward = 30f;
-    public float money = 100f;
+   public float workReward = 20f;
+public float money = 30f;
     public string npcName = "名無し";
     public float lifespan = 300f;
     private float age = 0f;
@@ -130,12 +130,22 @@ public class NPCMover : MonoBehaviour
             }
             else
             {
-                hunger = 0f;
-                isHungry = false;
-                RelocateFood(nearestFood);
-                money -= 10f;
-                GameLogger.Instance.Log(npcName, "食事をした");
-                SetRandomTarget();
+                if (money >= 25f)
+                {
+                    hunger = 0f;
+                    isHungry = false;
+                    RelocateFood(nearestFood);
+                    money -= 25f;
+                    GameLogger.Instance.Log(npcName, "食事をした");
+                    SetRandomTarget();
+                }
+                else
+                {
+                    GameLogger.Instance.Log(npcName, "餓死した");
+                    FindObjectsByType<NPCSpawner>(FindObjectsSortMode.None)[0].SpawnNPC();
+                    Destroy(gameObject);
+                    return;
+                }
             }
             return;
         }
@@ -169,7 +179,7 @@ public class NPCMover : MonoBehaviour
     {
         if (statusText != null)
         {
-            statusText.text = npcName + "\n" + text;
+            statusText.text = npcName + "\n" + text + "\n$" + (int)money;
         }
 
         Renderer rend = GetComponent<Renderer>();

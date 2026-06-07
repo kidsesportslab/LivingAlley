@@ -310,8 +310,8 @@ MonoBehaviour:
   fatigueMax: 15
   lonelinessMax: 20
   workDuration: 5
-  workReward: 30
-  money: 100
+  workReward: 20
+  money: 30
   npcName: "\u30B1\u30F3\u30B8"
-  lifespan: 300
+  lifespan: 60
   statusText: {fileID: 5854655151121507547}
