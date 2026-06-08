@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class NPCMover : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class NPCMover : MonoBehaviour
     public float lifespan = 300f;
     private float age = 0f;
     public TextMeshPro statusText;
+    public TextMeshProUGUI bubbleText;
+    private float bubbleTimer = 0f;
+    private string[] socialPhrases = { "やあ！", "元気？", "最近どう？", "いい天気だね", "また会ったね" };
 
     private Vector3 currentTarget;
     private float waitTimer = 0f;
@@ -39,8 +43,25 @@ public class NPCMover : MonoBehaviour
         SetRandomTarget();
     }
 
+   void LateUpdate()
+{
+    if (Camera.main == null) return;
+    Quaternion camRot = Camera.main.transform.rotation * Quaternion.Euler(0, 180, 0);
+    if (statusText != null)
+        statusText.transform.rotation = camRot;
+    if (bubbleText != null)
+        bubbleText.canvas.transform.rotation = camRot;
+}
+
     void Update()
     {
+        if (bubbleTimer > 0f)
+        {
+            bubbleTimer -= Time.deltaTime;
+            if (bubbleTimer <= 0f && bubbleText != null)
+                bubbleText.text = "...";
+        }
+
         age += Time.deltaTime;
         if (age >= lifespan)
         {
@@ -90,6 +111,7 @@ public class NPCMover : MonoBehaviour
                     loneliness = 0f;
                     isLonely = false;
                     GameLogger.Instance.Log(npcName, "社交した");
+                    ShowBubble(socialPhrases[Random.Range(0, socialPhrases.Length)]);
                     SetRandomTarget();
                 }
             }
@@ -180,9 +202,7 @@ public class NPCMover : MonoBehaviour
     void UpdateStatus(string text)
     {
         if (statusText != null)
-        {
             statusText.text = npcName + "\n" + text + "\n$" + (int)money;
-        }
 
         Renderer rend = GetComponent<Renderer>();
         if (rend == null) return;
@@ -269,5 +289,14 @@ public class NPCMover : MonoBehaviour
             }
         }
         return nearest;
+    }
+
+    void ShowBubble(string text)
+    {
+        if (bubbleText != null)
+        {
+            bubbleText.text = text;
+            bubbleTimer = 3f;
+        }
     }
 }
