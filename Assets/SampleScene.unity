@@ -1068,6 +1068,7 @@ MonoBehaviour:
   - {fileID: 1517557363}
   - {fileID: 982846975}
   bed: {fileID: 2070229863}
+  initialSpawnCount: 3
 --- !u!4 &841593897
 Transform:
   m_ObjectHideFlags: 0
@@ -2017,86 +2018,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117871466}
   m_CullTransparentMesh: 1
---- !u!1001 &6745360135245099812
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1066734513981836889, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: m_Name
-      value: stickman_1 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: bed
-      value: 
-      objectReference: {fileID: 2070229863}
-    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: lifespan
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: 'foods.Array.data[0]'
-      value: 
-      objectReference: {fileID: 328500369}
-    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: 'foods.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1517557363}
-    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      propertyPath: 'foods.Array.data[2]'
-      value: 
-      objectReference: {fileID: 982846975}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2072585926577315995, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-  m_SourcePrefab: {fileID: 100100000, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2113,4 +2034,3 @@ SceneRoots:
   - {fileID: 1022674261}
   - {fileID: 282786636}
   - {fileID: 841593897}
-  - {fileID: 6745360135245099812}

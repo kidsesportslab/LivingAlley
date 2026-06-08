@@ -12,8 +12,8 @@ public class NPCMover : MonoBehaviour
     public float fatigueMax = 15f;
     public float lonelinessMax = 20f;
     public float workDuration = 5f;
-   public float workReward = 20f;
-public float money = 30f;
+    public float workReward = 20f;
+    public float money = 30f;
     public string npcName = "名無し";
     public float lifespan = 300f;
     private float age = 0f;
@@ -57,7 +57,7 @@ public float money = 30f;
         if (hunger >= hungerMax) isHungry = true;
         if (fatigue >= fatigueMax) isTired = true;
         if (loneliness >= lonelinessMax) isLonely = true;
-        if (money <= 0f) { money = 0f; isWorking = true; }
+        if (money <= 0f) { money = 0f; isWorking = true; GameLogger.Instance.Log(npcName, "お金が尽きた"); }
 
         if (isWorking)
         {
@@ -89,6 +89,7 @@ public float money = 30f;
                 {
                     loneliness = 0f;
                     isLonely = false;
+                    GameLogger.Instance.Log(npcName, "社交した");
                     SetRandomTarget();
                 }
             }
@@ -96,6 +97,7 @@ public float money = 30f;
             {
                 loneliness = 0f;
                 isLonely = false;
+                SetRandomTarget();
             }
             return;
         }
