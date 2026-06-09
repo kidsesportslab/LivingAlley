@@ -50,8 +50,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1066734513981836889, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_Name
-      value: stickman_1 1
+      value: stickman_NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: waitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f926baf3cd22e5045aaae27e23300998, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

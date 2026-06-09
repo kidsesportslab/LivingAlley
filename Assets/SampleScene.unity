@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a00a3a772fbe547a008aae3a8f397d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 1066734513981836889, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+  npcPrefab: {fileID: 6818138157246835088, guid: daa2a69fd5c4da545bf8bee122df5b6c, type: 3}
   spawnRadius: 4
   foods:
   - {fileID: 328500369}
@@ -1363,6 +1363,7 @@ GameObject:
   - component: {fileID: 1436113817}
   - component: {fileID: 1436113816}
   - component: {fileID: 1436113815}
+  - component: {fileID: 1436113818}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1444,6 +1445,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1436113818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436113814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1b0c5c83b9fd04cb213ed7a9123fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  rotateSpeed: 3
 --- !u!1 &1517557363
 GameObject:
   m_ObjectHideFlags: 0

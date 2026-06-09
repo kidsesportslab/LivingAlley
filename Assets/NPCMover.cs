@@ -34,24 +34,26 @@ public class NPCMover : MonoBehaviour
     private bool isHungry = false;
     private bool isTired = false;
     private bool isLonely = false;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         hunger = Random.Range(0f, hungerMax * 0.5f);
         fatigue = Random.Range(0f, fatigueMax * 0.5f);
         GameLogger.Instance.Log(npcName, "誕生した");
         SetRandomTarget();
     }
 
-   void LateUpdate()
-{
-    if (Camera.main == null) return;
-    Quaternion camRot = Camera.main.transform.rotation * Quaternion.Euler(0, 180, 0);
-    if (statusText != null)
-        statusText.transform.rotation = camRot;
-    if (bubbleText != null)
-        bubbleText.canvas.transform.rotation = camRot;
-}
+    void LateUpdate()
+    {
+        if (Camera.main == null) return;
+        Quaternion camRot = Camera.main.transform.rotation * Quaternion.Euler(0, 180, 0);
+        if (statusText != null)
+            statusText.transform.rotation = camRot;
+        if (bubbleText != null)
+            bubbleText.canvas.transform.rotation = camRot;
+    }
 
     void Update()
     {
@@ -178,6 +180,7 @@ public class NPCMover : MonoBehaviour
 
         if (isWaiting)
         {
+            if (animator != null) animator.SetBool("isWalking", false);
             waitTimer -= Time.deltaTime;
             if (waitTimer <= 0f)
             {
@@ -216,10 +219,12 @@ public class NPCMover : MonoBehaviour
             case "sleep":
                 rend.material.color = Color.blue;
                 speed = 0.5f;
+                if (animator != null) animator.SetBool("isWalking", false);
                 break;
             case "working":
                 rend.material.color = Color.yellow;
                 speed = 0f;
+                if (animator != null) animator.SetBool("isWalking", false);
                 break;
             case "social":
                 rend.material.color = Color.green;
@@ -234,6 +239,7 @@ public class NPCMover : MonoBehaviour
 
     void MoveToward(Vector3 target)
     {
+        if (animator != null) animator.SetBool("isWalking", true);
         Vector3 direction = (target - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
         Vector3 lookDir = new Vector3(direction.x, 0, direction.z);
@@ -243,6 +249,7 @@ public class NPCMover : MonoBehaviour
 
     void SetRandomTarget()
     {
+        if (animator != null) animator.SetBool("isWalking", false);
         float x = Random.Range(-waypointRadius, waypointRadius);
         float z = Random.Range(-waypointRadius, waypointRadius);
         currentTarget = new Vector3(x, transform.position.y, z);
