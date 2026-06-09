@@ -17,6 +17,9 @@ public class NPCMover : MonoBehaviour
     public float money = 30f;
     public string npcName = "名無し";
     public float lifespan = 300f;
+    public float eatDuration = 3f;
+    public float sleepDuration = 5f;
+    public float socialDuration = 3f;
     private float age = 0f;
     public TextMeshPro statusText;
     public TextMeshProUGUI bubbleText;
@@ -26,6 +29,12 @@ public class NPCMover : MonoBehaviour
     private Vector3 currentTarget;
     private float waitTimer = 0f;
     private float workTimer = 0f;
+    private float eatTimer = 0f;
+    private float sleepTimer = 0f;
+    private float socialTimer = 0f;
+    private bool isEating = false;
+    private bool isSleeping = false;
+    private bool isSocializing = false;
     private float hunger = 0f;
     private float fatigue = 0f;
     private float loneliness = 0f;
@@ -35,6 +44,7 @@ public class NPCMover : MonoBehaviour
     private bool isTired = false;
     private bool isLonely = false;
     private Animator animator;
+    private int currentState = -1;
 
     void Start()
     {
@@ -53,6 +63,15 @@ public class NPCMover : MonoBehaviour
             statusText.transform.rotation = camRot;
         if (bubbleText != null)
             bubbleText.canvas.transform.rotation = camRot;
+    }
+
+    void SetAnimState(int s)
+    {
+        if (animator != null && currentState != s)
+        {
+            animator.SetInteger("state", s);
+            currentState = s;
+        }
     }
 
     void Update()
@@ -82,9 +101,62 @@ public class NPCMover : MonoBehaviour
         if (loneliness >= lonelinessMax) isLonely = true;
         if (money <= 0f) { money = 0f; isWorking = true; GameLogger.Instance.Log(npcName, "お金が尽きた"); }
 
+        // 食事中タイマー
+        if (isEating)
+        {
+            UpdateStatus("hungry");
+            SetAnimState(5);
+            eatTimer += Time.deltaTime;
+            if (eatTimer >= eatDuration)
+            {
+                isEating = false;
+                eatTimer = 0f;
+                GameLogger.Instance.Log(npcName, "食事をした");
+                SetRandomTarget();
+            }
+            return;
+        }
+
+        // 睡眠中タイマー
+        if (isSleeping)
+        {
+            UpdateStatus("sleep");
+            SetAnimState(4);
+            sleepTimer += Time.deltaTime;
+            if (sleepTimer >= sleepDuration)
+            {
+                isSleeping = false;
+                sleepTimer = 0f;
+                fatigue = 0f;
+                isTired = false;
+                GameLogger.Instance.Log(npcName, "眠った");
+                SetRandomTarget();
+            }
+            return;
+        }
+
+        // 社交中タイマー
+        if (isSocializing)
+        {
+            UpdateStatus("social");
+            SetAnimState(3);
+            socialTimer += Time.deltaTime;
+            if (socialTimer >= socialDuration)
+            {
+                isSocializing = false;
+                socialTimer = 0f;
+                loneliness = 0f;
+                isLonely = false;
+                GameLogger.Instance.Log(npcName, "社交した");
+                SetRandomTarget();
+            }
+            return;
+        }
+
         if (isWorking)
         {
             UpdateStatus("working");
+            SetAnimState(2);
             workTimer += Time.deltaTime;
             if (workTimer >= workDuration)
             {
@@ -106,15 +178,14 @@ public class NPCMover : MonoBehaviour
                 float dist = Vector3.Distance(transform.position, nearestNPC.transform.position);
                 if (dist > 1.5f)
                 {
-                    MoveToward(nearestNPC.transform.position);
+                    SetAnimState(1);
+                    MoveTowardNoAnim(nearestNPC.transform.position);
                 }
                 else
                 {
-                    loneliness = 0f;
-                    isLonely = false;
-                    GameLogger.Instance.Log(npcName, "社交した");
+                    isSocializing = true;
+                    socialTimer = 0f;
                     ShowBubble(socialPhrases[Random.Range(0, socialPhrases.Length)]);
-                    SetRandomTarget();
                 }
             }
             else
@@ -132,14 +203,13 @@ public class NPCMover : MonoBehaviour
             float dist = Vector3.Distance(transform.position, bed.transform.position);
             if (dist > 0.5f)
             {
-                MoveToward(bed.transform.position);
+                SetAnimState(1);
+                MoveTowardNoAnim(bed.transform.position);
             }
             else
             {
-                fatigue = 0f;
-                isTired = false;
-                GameLogger.Instance.Log(npcName, "眠った");
-                SetRandomTarget();
+                isSleeping = true;
+                sleepTimer = 0f;
             }
             return;
         }
@@ -152,7 +222,8 @@ public class NPCMover : MonoBehaviour
             float dist = Vector3.Distance(transform.position, nearestFood.transform.position);
             if (dist > 0.5f)
             {
-                MoveToward(nearestFood.transform.position);
+                SetAnimState(1);
+                MoveTowardNoAnim(nearestFood.transform.position);
             }
             else
             {
@@ -162,8 +233,8 @@ public class NPCMover : MonoBehaviour
                     isHungry = false;
                     RelocateFood(nearestFood);
                     money -= 25f;
-                    GameLogger.Instance.Log(npcName, "食事をした");
-                    SetRandomTarget();
+                    isEating = true;
+                    eatTimer = 0f;
                 }
                 else
                 {
@@ -180,7 +251,7 @@ public class NPCMover : MonoBehaviour
 
         if (isWaiting)
         {
-            if (animator != null) animator.SetBool("isWalking", false);
+            SetAnimState(0);
             waitTimer -= Time.deltaTime;
             if (waitTimer <= 0f)
             {
@@ -193,7 +264,8 @@ public class NPCMover : MonoBehaviour
         float distance = Vector3.Distance(transform.position, currentTarget);
         if (distance > 0.3f)
         {
-            MoveToward(currentTarget);
+            SetAnimState(1);
+            MoveTowardNoAnim(currentTarget);
         }
         else
         {
@@ -219,12 +291,10 @@ public class NPCMover : MonoBehaviour
             case "sleep":
                 rend.material.color = Color.blue;
                 speed = 0.5f;
-                if (animator != null) animator.SetBool("isWalking", false);
                 break;
             case "working":
                 rend.material.color = Color.yellow;
                 speed = 0f;
-                if (animator != null) animator.SetBool("isWalking", false);
                 break;
             case "social":
                 rend.material.color = Color.green;
@@ -237,9 +307,8 @@ public class NPCMover : MonoBehaviour
         }
     }
 
-    void MoveToward(Vector3 target)
+    void MoveTowardNoAnim(Vector3 target)
     {
-        if (animator != null) animator.SetBool("isWalking", true);
         Vector3 direction = (target - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
         Vector3 lookDir = new Vector3(direction.x, 0, direction.z);
@@ -249,7 +318,7 @@ public class NPCMover : MonoBehaviour
 
     void SetRandomTarget()
     {
-        if (animator != null) animator.SetBool("isWalking", false);
+        SetAnimState(0);
         float x = Random.Range(-waypointRadius, waypointRadius);
         float z = Random.Range(-waypointRadius, waypointRadius);
         currentTarget = new Vector3(x, transform.position.y, z);
@@ -271,11 +340,7 @@ public class NPCMover : MonoBehaviour
         {
             if (f == null) continue;
             float d = Vector3.Distance(transform.position, f.transform.position);
-            if (d < minDist)
-            {
-                minDist = d;
-                nearest = f;
-            }
+            if (d < minDist) { minDist = d; nearest = f; }
         }
         return nearest;
     }
@@ -289,11 +354,7 @@ public class NPCMover : MonoBehaviour
         {
             if (npc.gameObject == this.gameObject) continue;
             float d = Vector3.Distance(transform.position, npc.transform.position);
-            if (d < minDist)
-            {
-                minDist = d;
-                nearest = npc.gameObject;
-            }
+            if (d < minDist) { minDist = d; nearest = npc.gameObject; }
         }
         return nearest;
     }
