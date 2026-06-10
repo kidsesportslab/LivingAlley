@@ -53,6 +53,14 @@ PrefabInstance:
       value: stickman_NPC
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: money
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: lifespan
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: waitTime
       value: 5
       objectReference: {fileID: 0}
