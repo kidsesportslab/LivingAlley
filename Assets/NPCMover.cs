@@ -58,7 +58,7 @@ public class NPCMover : MonoBehaviour
     void LateUpdate()
     {
         if (Camera.main == null) return;
-        Quaternion camRot = Camera.main.transform.rotation * Quaternion.Euler(0, 180, 0);
+        Quaternion camRot = Camera.main.transform.rotation;
         if (statusText != null)
             statusText.transform.rotation = camRot;
         if (bubbleText != null)
@@ -185,18 +185,17 @@ public class NPCMover : MonoBehaviour
 {
     isSocializing = true;
     socialTimer = 0f;
-    string prompt = $"あなたは仮想世界の住人「{npcName}」です。所持金は{(int)money}コインです。" +
-    "友達に会ったときの挨拶を必ず日本語で15文字以内で一言だけ話してください。日本語以外は禁止。セリフのみ出力。";
-    OllamaClient.Instance.Generate(prompt, (response) =>
-{
-    Debug.Log($"{npcName}のセリフ生成: {response}");
-    if (response != null && this != null)
+    string dialogue = DialoguePool.Instance != null ? DialoguePool.Instance.GetDialogue() : null;
+    if (dialogue != null)
     {
-        string clean = response.Trim().Replace("「", "").Replace("」", "");
-        if (clean.Length > 20) clean = clean.Substring(0, 20);
-        ShowBubble(clean);
+        ShowBubble(dialogue);
     }
-});
+    else
+    {
+        // プールが空ならフォールバックで固定セリフ
+        ShowBubble(socialPhrases[Random.Range(0, socialPhrases.Length)]);
+    }
+
 }
             }
             else
