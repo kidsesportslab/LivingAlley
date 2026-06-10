@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -37,14 +38,15 @@ public class DialoguePool : MonoBehaviour
 
     void RequestOne()
     {
-        string prompt = "あなたは仮想世界の住人です。友達に会ったときの挨拶や雑談を必ず日本語で15文字以内で一言だけ話してください。日本語以外は禁止。セリフのみ出力。";
+        string prompt = "あなたは仮想世界の住人です。友達に会ったときの挨拶や雑談を必ず日本語のひらがなとカタカナのみで15文字以内で一言だけ話してください。漢字と日本語以外は禁止。セリフのみ出力。";
         OllamaClient.Instance.Generate(prompt, (response) =>
         {
             if (response != null)
             {
                 string clean = response.Trim().Replace("「", "").Replace("」", "");
-                if (clean.Length > 20) clean = clean.Substring(0, 20);
-                if (clean.Length > 0) pool.Enqueue(clean);
+clean = Regex.Replace(clean, @"[^ぁ-んァ-ヶー一-龠a-zA-Z0-9、。！？!? ]", "");
+if (clean.Length > 20) clean = clean.Substring(0, 20);
+if (clean.Length > 0) pool.Enqueue(clean);
             }
 
             if (pool.Count < poolTargetSize)
