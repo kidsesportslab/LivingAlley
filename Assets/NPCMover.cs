@@ -45,6 +45,7 @@ public class NPCMover : MonoBehaviour
     private bool isLonely = false;
     private Animator animator;
     private int currentState = -1;
+    private bool isBroke = false;
 
     void Start()
     {
@@ -99,7 +100,17 @@ public class NPCMover : MonoBehaviour
         if (hunger >= hungerMax) isHungry = true;
         if (fatigue >= fatigueMax) isTired = true;
         if (loneliness >= lonelinessMax) isLonely = true;
-        if (money <= 0f) { money = 0f; isWorking = true; GameLogger.Instance.Log(npcName, "お金が尽きた"); }
+        if (money <= 0f && !isBroke)
+{
+    money = 0f;
+    isBroke = true;
+    isWorking = true;
+    GameLogger.Instance.Log(npcName, "お金が尽きた");
+}
+else if (money > 0f)
+{
+    isBroke = false;
+}
 
         // 食事中タイマー
         if (isEating)
