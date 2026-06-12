@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -193,21 +194,11 @@ else if (money > 0f)
                     MoveTowardNoAnim(nearestNPC.transform.position);
                 }
                 else
-{
-    isSocializing = true;
-    socialTimer = 0f;
-    string dialogue = DialoguePool.Instance != null ? DialoguePool.Instance.GetDialogue() : null;
-    if (dialogue != null)
-    {
-        ShowBubble(dialogue);
-    }
-    else
-    {
-        // プールが空ならフォールバックで固定セリフ
-        ShowBubble(socialPhrases[Random.Range(0, socialPhrases.Length)]);
-    }
-
-}
+                {
+                    isSocializing = true;
+                    socialTimer = 0f;
+                    StartCoroutine(ShowDialogueWhenReady());
+                }
             }
             else
             {
@@ -378,6 +369,24 @@ else if (money > 0f)
             if (d < minDist) { minDist = d; nearest = npc.gameObject; }
         }
         return nearest;
+    }
+
+    IEnumerator ShowDialogueWhenReady()
+    {
+        if (DialoguePool.Instance != null && DialoguePool.Instance.PoolCount == 0)
+        {
+            float elapsed = 0f;
+            while (DialoguePool.Instance.PoolCount == 0 && elapsed < 8f)
+            {
+                yield return new WaitForSeconds(0.5f);
+                elapsed += 0.5f;
+            }
+        }
+
+        string dialogue = DialoguePool.Instance != null
+            ? DialoguePool.Instance.GetDialogue(npcName, money, hunger)
+            : null;
+        ShowBubble(dialogue ?? socialPhrases[Random.Range(0, socialPhrases.Length)]);
     }
 
     void ShowBubble(string text)
