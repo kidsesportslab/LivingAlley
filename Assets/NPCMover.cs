@@ -11,7 +11,7 @@ public class NPCMover : MonoBehaviour
     public GameObject[] foods;
     public GameObject bed;
     public float hungerMax = 10f;
-    public float fatigueMax = 15f;
+    public float fatigueMax = 150f;
     public float lonelinessMax = 20f;
     public float workDuration = 5f;
     public float workReward = 20f;
@@ -291,7 +291,7 @@ else if (money > 0f)
         if (statusText != null)
             statusText.text = npcName + "\n" + text + "\n$" + (int)money;
 
-        Renderer rend = GetComponent<Renderer>();
+        Renderer rend = GetComponentInChildren<Renderer>();
         if (rend == null) return;
 
         switch (text)
