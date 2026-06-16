@@ -67,7 +67,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &8257712405643560884
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,12 +75,13 @@ Animator:
   m_GameObject: {fileID: 6332122057602769420}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f9d0ccbb329a724b8af67f1f13cde47, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5025bd179e8fe9642bf88ebec5d912c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

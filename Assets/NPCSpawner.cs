@@ -3,7 +3,8 @@ using System.Collections;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public GameObject npcPrefab;
+    public GameObject npcBasePrefab;
+    public GameObject[] visualPrefabs;
     public float spawnRadius = 4f;
     public GameObject[] foods;
 public GameObject bed;
@@ -19,13 +20,13 @@ void Start()
 }
 
     private string[] npcNames = {
-        "ƒPƒ“ƒW", "ƒnƒ‹ƒg", "ƒ\ƒEƒ^", "ƒŠƒ‡ƒE", "ƒiƒIƒL",
-        "ƒAƒ„ƒJ", "ƒ~ƒTƒL", "ƒ†ƒC", "ƒnƒi", "ƒTƒNƒ‰"
+        "ã‚±ãƒ³ã‚¸", "ãƒãƒ«ãƒˆ", "ã‚½ã‚¦ã‚¿", "ãƒªãƒ§ã‚¦", "ãƒŠã‚ªã‚­",
+        "ã‚¢ãƒ¤ã‚«", "ãƒŸã‚µã‚­", "ãƒ¦ã‚¤", "ãƒãƒŠ", "ã‚µã‚¯ãƒ©"
     };
 
     public void SpawnNPC()
     {
-        if (npcPrefab == null) return;
+        if (npcBasePrefab == null || visualPrefabs == null || visualPrefabs.Length == 0) return;
         float delay = Random.Range(0f, 2f);
         StartCoroutine(SpawnAfterDelay(delay));
     }
@@ -36,7 +37,14 @@ void Start()
         float x = Random.Range(-spawnRadius, spawnRadius);
         float z = Random.Range(-spawnRadius, spawnRadius);
         Vector3 spawnPos = new Vector3(x, 0.5f, z);
-        GameObject newNPC = Instantiate(npcPrefab, spawnPos, Quaternion.identity);
+
+        GameObject newNPC = Instantiate(npcBasePrefab, spawnPos, Quaternion.identity);
+
+        GameObject visualPrefab = visualPrefabs[Random.Range(0, visualPrefabs.Length)];
+        GameObject visual = Instantiate(visualPrefab, newNPC.transform);
+        visual.transform.localPosition = Vector3.zero;
+        visual.transform.localRotation = Quaternion.identity;
+
         NPCMover mover = newNPC.GetComponent<NPCMover>();
         if (mover != null)
         {

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5788016008882202569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398038395810026723, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1066734513981836889, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Name
+      value: stickman_NPC 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: money
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: lifespan
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: waitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: fatigueMax
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f926baf3cd22e5045aaae27e23300998, type: 2}
+    m_RemovedComponents:
+    - {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7479052330317311578, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+    - {fileID: 4219481648677622771, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}

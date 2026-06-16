@@ -50,7 +50,7 @@ public class NPCMover : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         hunger = Random.Range(0f, hungerMax * 0.5f);
         fatigue = Random.Range(0f, fatigueMax * 0.5f);
         GameLogger.Instance.Log(npcName, "誕生した");
