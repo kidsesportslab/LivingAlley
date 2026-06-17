@@ -10,9 +10,9 @@ public class NPCMover : MonoBehaviour
     public float waitTime = 1f;
     public GameObject[] foods;
     public GameObject bed;
-    public float hungerMax = 10f;
-    public float fatigueMax = 150f;
-    public float lonelinessMax = 20f;
+    public float hungerMax = 300f;
+    public float fatigueMax = 1200f;
+    public float lonelinessMax = 600f;
     public float workDuration = 5f;
     public float workReward = 20f;
     public float money = 30f;

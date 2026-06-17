@@ -40,10 +40,10 @@ public class DialoguePool : MonoBehaviour
 
     void RequestOne(string npcName, float money, float hunger)
     {
-        string hungerDesc = hunger > 7f ? "かなり空腹" : hunger > 4f ? "少し空腹" : "満腹";
+        string hungerDesc = hunger > 210f ? "かなり空腹" : hunger > 120f ? "少し空腹" : "満腹";
         string moneyDesc  = money  < 10f ? "お金がほぼない" : money < 30f ? "お金が少ない" : "余裕がある";
         string prompt = $"あなたは仮想世界の村人「{npcName}」です。状態：{hungerDesc}、所持金{(int)money}円（{moneyDesc}）。" +
-                        "他の村人に話しかけるときの一言を、ひらがなとカタカナのみ15文字以内で一言だけ言ってください。日本語以外は禁止。セリフのみ出力。";
+                        "他の村人に話しかけるときの一言を、ひらがなとカタカナのみ15文字以内で一言だけ言ってください。アルファベット(ローマ字)は絶対に使わないでください。英語やローマ字表記は禁止です。必ず日本語の文字だけで書いてください。セリフのみ出力。";
 
         _client.Generate(prompt, (response) =>
         {
