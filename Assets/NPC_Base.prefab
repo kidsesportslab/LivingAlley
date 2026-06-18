@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1066734513981836889, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_Name
-      value: stickman_NPC 1
+      value: NPC_Base
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: money
@@ -58,15 +58,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: lifespan
-      value: 60
+      value: 5400
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: waitTime
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: hungerMax
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: fatigueMax
-      value: 150
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: eatDuration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: lonelinessMax
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: sleepDuration
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: socialDuration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_Controller

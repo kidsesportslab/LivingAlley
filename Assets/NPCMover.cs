@@ -17,7 +17,7 @@ public class NPCMover : MonoBehaviour
     public float workReward = 20f;
     public float money = 30f;
     public string npcName = "名無し";
-    public float lifespan = 300f;
+    public float lifespan = 5400f;
     public float eatDuration = 20f;
     public float sleepDuration = 90f;
     public float socialDuration = 20f;
@@ -36,9 +36,9 @@ public class NPCMover : MonoBehaviour
     private bool isEating = false;
     private bool isSleeping = false;
     private bool isSocializing = false;
-    private float hunger = 0f;
-    private float fatigue = 0f;
-    private float loneliness = 0f;
+    [SerializeField] private float hunger = 0f;
+    [SerializeField] private float fatigue = 0f;
+    [SerializeField] private float loneliness = 0f;
     private bool isWaiting = false;
     private bool isWorking = false;
     private bool isHungry = false;
