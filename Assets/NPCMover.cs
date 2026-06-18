@@ -18,9 +18,9 @@ public class NPCMover : MonoBehaviour
     public float money = 30f;
     public string npcName = "名無し";
     public float lifespan = 300f;
-    public float eatDuration = 3f;
-    public float sleepDuration = 5f;
-    public float socialDuration = 3f;
+    public float eatDuration = 20f;
+    public float sleepDuration = 90f;
+    public float socialDuration = 20f;
     private float age = 0f;
     public TextMeshPro statusText;
     public TextMeshProUGUI bubbleText;
@@ -51,8 +51,9 @@ public class NPCMover : MonoBehaviour
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        hunger = Random.Range(0f, hungerMax * 0.5f);
-        fatigue = Random.Range(0f, fatigueMax * 0.5f);
+        hunger = Random.Range(0f, hungerMax);
+        fatigue = Random.Range(0f, fatigueMax);
+        loneliness = Random.Range(0f, lonelinessMax);
         GameLogger.Instance.Log(npcName, "誕生した");
         SetRandomTarget();
     }
