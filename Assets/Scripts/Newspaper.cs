@@ -9,14 +9,37 @@ public class Newspaper : MonoBehaviour
     [SerializeField] OllamaClient ollamaClient;
     [SerializeField] TextMeshProUGUI articleText;
     [SerializeField] Button generateButton;
+    [SerializeField] GameObject newspaperPanel;  // トグル対象のパネル
 
     const string HistoryPath = "C:/Users/Administrator/AppData/LocalLow/DefaultCompany/LivingAlley/history.txt";
     const int MaxHistoryLines = 50;
 
     void Start()
     {
+        if (newspaperPanel != null)
+            newspaperPanel.SetActive(false);
+
         if (generateButton != null)
-            generateButton.onClick.AddListener(GenerateNewspaper);
+            generateButton.onClick.AddListener(ToggleNewspaper);
+    }
+
+    void Update()
+    {
+        // Nキーでもトグル可能
+        if (Input.GetKeyDown(KeyCode.N))
+            ToggleNewspaper();
+    }
+
+    public void ToggleNewspaper()
+    {
+        Debug.Log("ToggleNewspaper called");
+        if (newspaperPanel == null) return;
+
+        bool willShow = !newspaperPanel.activeSelf;
+        newspaperPanel.SetActive(willShow);
+
+        if (willShow)
+            GenerateNewspaper();
     }
 
     public void GenerateNewspaper()
@@ -30,6 +53,12 @@ public class Newspaper : MonoBehaviour
         string[] lines = File.ReadAllLines(HistoryPath, Encoding.UTF8);
         int start = Mathf.Max(0, lines.Length - MaxHistoryLines);
         string history = string.Join("\n", lines, start, lines.Length - start);
+
+        if (ollamaClient == null)
+        {
+            SetText("OllamaClientが未設定です。");
+            return;
+        }
 
         SetText("生成中...");
         if (generateButton != null) generateButton.interactable = false;
