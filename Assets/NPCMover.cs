@@ -12,7 +12,7 @@ public class NPCMover : MonoBehaviour
     public GameObject bed;
     public float hungerMax = 300f;
     public float fatigueMax = 1200f;
-    public float lonelinessMax = 600f;
+    public float lonelinessMax = 150f;
     public float workDuration = 5f;
     public float workReward = 20f;
     public float money = 30f;
@@ -199,6 +199,9 @@ else if (money > 0f)
                     isSocializing = true;
                     socialTimer = 0f;
                     StartCoroutine(ShowDialogueWhenReady());
+                    NPCMover targetMover = nearestNPC.GetComponent<NPCMover>();
+                    if (targetMover != null && !targetMover.isSocializing)
+                        targetMover.StartSocializing();
                 }
             }
             else
@@ -388,6 +391,15 @@ else if (money > 0f)
             ? DialoguePool.Instance.GetDialogue(npcName, money, hunger)
             : null;
         ShowBubble(dialogue ?? socialPhrases[Random.Range(0, socialPhrases.Length)]);
+    }
+
+    public void StartSocializing()
+    {
+        isSocializing = true;
+        socialTimer = 0f;
+        UpdateStatus("social");
+        SetAnimState(3);
+        StartCoroutine(ShowDialogueWhenReady());
     }
 
     void ShowBubble(string text)
