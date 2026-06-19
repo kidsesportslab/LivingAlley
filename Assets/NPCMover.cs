@@ -201,7 +201,7 @@ else if (money > 0f)
                     StartCoroutine(ShowDialogueWhenReady());
                     NPCMover targetMover = nearestNPC.GetComponent<NPCMover>();
                     if (targetMover != null && !targetMover.isSocializing)
-                        targetMover.StartSocializing();
+                        targetMover.StartSocializing(transform);
                 }
             }
             else
@@ -393,12 +393,16 @@ else if (money > 0f)
         ShowBubble(dialogue ?? socialPhrases[Random.Range(0, socialPhrases.Length)]);
     }
 
-    public void StartSocializing()
+    public void StartSocializing(Transform initiator)
     {
         isSocializing = true;
         socialTimer = 0f;
         UpdateStatus("social");
         SetAnimState(3);
+        Vector3 lookDir = initiator.position - transform.position;
+        lookDir.y = 0f;
+        if (lookDir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(lookDir);
         StartCoroutine(ShowDialogueWhenReady());
     }
 
