@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -15,7 +15,7 @@ public class DialoguePool : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        _client = FindObjectOfType<OllamaClient>();
+        _client = FindFirstObjectByType<OllamaClient>();
     }
 
     void Start()
