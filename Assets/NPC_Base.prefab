@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC_Base
       objectReference: {fileID: 0}
+    - target: {fileID: 1551517698211787374, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: money
       value: 50
@@ -78,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: lonelinessMax
-      value: 600
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4573943026652796980, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: sleepDuration
@@ -92,6 +96,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: f926baf3cd22e5045aaae27e23300998, type: 2}
+    - target: {fileID: 8765432198765432102, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 8765432198765432104, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8765432198765432104, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents:
     - {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
     m_RemovedGameObjects:
