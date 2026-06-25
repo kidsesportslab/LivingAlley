@@ -49,7 +49,7 @@ public class DialoguePool : MonoBehaviour
             {
                 string clean = response.Trim().Replace("\u3001", "").Replace("\u3002", "");
                 clean = System.Text.RegularExpressions.Regex.Replace(clean, @"[^\u3041-\u309F\u30A0-\u30FF\u4E00-\u9FFF\s]", "");
-                if (clean.Length > 20) clean = clean.Substring(0, 20);
+                if (clean.Length > 40) clean = clean.Substring(0, 40);
                 if (clean.Length > 0) pool.Enqueue(clean);
             }
             if (pool.Count < poolTargetSize)
