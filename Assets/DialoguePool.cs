@@ -20,6 +20,7 @@ public class DialoguePool : MonoBehaviour
 
     void Start()
     {
+        _client.Generate("テスト", _ => {});
         FillPool("村人", 30f, 0f);
     }
 
