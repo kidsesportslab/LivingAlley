@@ -20,7 +20,7 @@ public class OllamaClient : MonoBehaviour
 
     IEnumerator GenerateRoutine(string prompt, Action<string> onComplete, Action<string> onError)
     {
-        var json = JsonUtility.ToJson(new RequestBody { model = model, prompt = prompt, stream = false, keep_alive = "3m" });
+        var json = JsonUtility.ToJson(new RequestBody { model = model, prompt = prompt, stream = false, keep_alive = "30m" });
         var bytes = Encoding.UTF8.GetBytes(json);
 
         using var req = new UnityWebRequest(Endpoint, "POST");
