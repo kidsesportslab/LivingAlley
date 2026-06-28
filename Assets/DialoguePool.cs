@@ -59,5 +59,34 @@ public class DialoguePool : MonoBehaviour
         });
     }
 
+    public void RequestConversation(
+        string nameA, float moneyA, float hungerA,
+        string nameB, float moneyB, float hungerB,
+        System.Action<List<(string speaker, string text)>> callback)
+    {
+        if (_client == null) { callback(null); return; }
+        string hungerDescA = hungerA > 210f ? "かなり空腹" : hungerA > 120f ? "少し空腹" : "満腹";
+        string hungerDescB = hungerB > 210f ? "かなり空腹" : hungerB > 120f ? "少し空腹" : "満腹";
+        string prompt =
+            $"NPC_Aは{nameA}（{hungerDescA}、所持金{(int)moneyA}リル）、NPC_Bは{nameB}（{hungerDescB}、所持金{(int)moneyB}リル）です。ナリソメ村で2人が出会いました。それぞれの状態を自然に反映した会話を3ターン分返してください。必ず以下のJSON形式のみで返してください。説明文・マークダウン・余計な文字は一切不要です。" +
+            "{\"conversation\":[{\"speaker\":\"A\",\"text\":\"...\"},{\"speaker\":\"B\",\"text\":\"...\"},{\"speaker\":\"A\",\"text\":\"...\"}]}" +
+            "制約：日本語のみ、1ターン40文字以内、中国語・アルファベット絶対禁止。";
+
+        _client.Generate(prompt, (response) =>
+        {
+            if (response == null) { callback(null); return; }
+            try
+            {
+                var result = new List<(string speaker, string text)>();
+                var matches = Regex.Matches(response,
+                    @"""speaker""\s*:\s*""([^""]+)""\s*,\s*""text""\s*:\s*""([^""]+)""");
+                foreach (Match m in matches)
+                    result.Add((m.Groups[1].Value, m.Groups[2].Value));
+                callback(result.Count > 0 ? result : null);
+            }
+            catch { callback(null); }
+        });
+    }
+
     public int PoolCount => pool.Count;
 }

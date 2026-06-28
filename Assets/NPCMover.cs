@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -47,6 +48,7 @@ public class NPCMover : MonoBehaviour
     private Animator animator;
     private int currentState = -1;
     private bool isBroke = false;
+    public float Hunger => hunger;
 
     void Start()
     {
@@ -198,10 +200,22 @@ else if (money > 0f)
                 {
                     isSocializing = true;
                     socialTimer = 0f;
-                    StartCoroutine(ShowDialogueWhenReady());
                     NPCMover targetMover = nearestNPC.GetComponent<NPCMover>();
                     if (targetMover != null && !targetMover.isSocializing)
+                    {
                         targetMover.StartSocializing(transform);
+                        if (DialoguePool.Instance != null)
+                            DialoguePool.Instance.RequestConversation(
+                                npcName, money, hunger,
+                                targetMover.npcName, targetMover.money, targetMover.Hunger,
+                                (lines) => StartCoroutine(ShowConversationCoroutine(lines, targetMover)));
+                        else
+                            StartCoroutine(ShowDialogueWhenReady());
+                    }
+                    else
+                    {
+                        StartCoroutine(ShowDialogueWhenReady());
+                    }
                 }
             }
             else
@@ -393,6 +407,23 @@ else if (money > 0f)
         ShowBubble(dialogue ?? socialPhrases[Random.Range(0, socialPhrases.Length)]);
     }
 
+    IEnumerator ShowConversationCoroutine(List<(string speaker, string text)> lines, NPCMover partner)
+    {
+        if (lines == null)
+        {
+            StartCoroutine(ShowDialogueWhenReady());
+            yield break;
+        }
+        foreach (var line in lines)
+        {
+            if (line.speaker == "A")
+                ShowBubble(line.text);
+            else if (line.speaker == "B" && partner != null)
+                partner.ShowBubble(line.text);
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
     public void StartSocializing(Transform initiator)
     {
         isSocializing = true;
@@ -403,10 +434,9 @@ else if (money > 0f)
         lookDir.y = 0f;
         if (lookDir != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(lookDir);
-        StartCoroutine(ShowDialogueWhenReady());
     }
 
-    void ShowBubble(string text)
+    public void ShowBubble(string text)
     {
         if (bubbleText != null)
         {
