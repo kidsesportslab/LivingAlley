@@ -53,6 +53,10 @@ PrefabInstance:
       value: NPC_Base
       objectReference: {fileID: 0}
     - target: {fileID: 1551517698211787374, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551517698211787374, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_SizeDelta.y
       value: 200
       objectReference: {fileID: 0}
@@ -92,10 +96,22 @@ PrefabInstance:
       propertyPath: socialDuration
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5166096727517615424, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166096727517615424, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: f926baf3cd22e5045aaae27e23300998, type: 2}
+    - target: {fileID: 8765432198765432102, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 270
+      objectReference: {fileID: 0}
     - target: {fileID: 8765432198765432102, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
       propertyPath: m_SizeDelta.y
       value: 220
@@ -108,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8765432198765432104, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5222862704538045982, guid: fd98af9f43170cc4597cd5ce375686d3, type: 3}
     m_RemovedGameObjects:

@@ -307,7 +307,7 @@ else if (money > 0f)
     void UpdateStatus(string text)
     {
         if (statusText != null)
-            statusText.text = npcName + "\n" + text + "\n$" + (int)money;
+            statusText.text = npcName + "\n" + text + "\n" + (int)money + "リル";
 
         Renderer rend = GetComponentInChildren<Renderer>();
         if (rend == null) return;
